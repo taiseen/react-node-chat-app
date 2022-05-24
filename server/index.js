@@ -1,35 +1,50 @@
-import { createServer } from 'http';
-import { Server } from 'socket.io';
+import { createServer } from "http";
+import { Server } from "socket.io";
 import express from 'express';
+import cors from 'cors';
 
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, { cors: { origin: '*' } });
 
+
+// middleware's
+app.use(cors());
 app.use(express.static('public'));
 app.use('/fav.ico', express.static('public/fav.ico'));
 
 
-// 😊 Client Connection
-// 🤔 all code run inside this function()
+// 1st) 🟩 From server side, 
+// socket connection start from here...
+// 🙄 all code run inside this function()
 // when client hit into this server through URL 🔗 
 // then we received realtime connection/disconnection
 io.on('connection', (socket) => {
-    console.log('client connected... ✔');
+
+    console.log('Client Open App... ✅');
+    console.log(socket.id);
+
+
+    // event create | & | listener method present at client side
+    // Client listen this event by .emit() method... at client side  
+    socket.on('join', ({ name, room }, callback) => {
+        console.log(name, room);
+        callback();
+    });
+
 
     socket.on('disconnect', () => {
-        console.log('client disconnected... ❌');
+        console.log('Client Close App... ❌');
     })
 });
- 
 
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
     console.log('Server is running at port', PORT, '✅');
 })
-
 
 
 // Default welcome message at root/index page...
@@ -77,3 +92,10 @@ const welcomeMessage = (req, res) => {
     `).status(200);
 }
 app.get('/', welcomeMessage);
+
+
+
+// const express = require('express');
+// // const { Server } = require('socket.io');
+// const socket = require('socket.io');
+// const http = require('http');

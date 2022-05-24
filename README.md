@@ -1,6 +1,6 @@
-<img src="./client/public/readme.png" style='width:175px' align="right" />
+<img src="./client/public/readme.png" style='width:200px' align="right" />
 
-24 - May - 2022
+> 24 - May - 2022
 
 ## Chat App | [Live Link][client]
 
@@ -18,7 +18,7 @@ when you open this chat app through (1st) tab into your browser.
 
 Now start testing & chatting... 
 
-Happy Charting!... 😎😊😎
+Happy Chatting!... 😎😊😎
 ```
 
 <br/>
@@ -46,7 +46,7 @@ Happy Charting!... 😎😊😎
 
     🟨
     ├── client 
-    │   ├── public
+    │   ├── public              # root div#id for react app
     │   └── src
     |       ├── components      # all needful components 
     |       ├── style           # reset base styling
@@ -61,7 +61,7 @@ Happy Charting!... 😎😊😎
     |
     ├── .gitignore
     ├── README.md
-    └── readme.png
+    └── license
     🟨
 
 
@@ -76,7 +76,7 @@ Happy Charting!... 😎😊😎
 | 6| HTTP Server + Express + `Socket.io`          |
 
     
-> Learning by inspired from[.](https://youtu.be/ZwFA3YMfkoc)
+Learning by inspired from[.](https://youtu.be/ZwFA3YMfkoc)
 
 
 ## 📜 License under the [MIT License](license)
