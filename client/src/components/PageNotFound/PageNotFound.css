@@ -1,0 +1,24 @@
+.pageNotFound {
+    background     : rgba(8, 133, 60, 0.3);
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    flex-direction : column;
+    gap            : 20px;
+    min-height     : 100vh;
+}
+
+.pageNotFound h1 {
+    font-size     : 42px;
+    letter-spacing: 2px;
+    color         : rgba(49, 21, 17, 0.6);
+}
+
+.homeLink {
+    font-size: 22px;
+    color    : #222;
+}
+
+.homeLink:hover {
+    text-decoration: underline;
+}
