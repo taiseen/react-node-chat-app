@@ -15,7 +15,7 @@ let socket;
 
 const Chat = () => {
 
-  const Server = 'http://localhost:5000'
+  const server = 'http://localhost:5000'
 
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
@@ -36,7 +36,12 @@ const Chat = () => {
 
     // 1st) 🟩 From client side, 
     // socket connection start from here...
-    socket = io(Server)
+    socket = io(server)
+
+    console.log(socket);
+
+    // just print client socket id into console
+    socket.on('connect', () => console.log(socket.id))
 
 
     // 2nd) 🟩 server response according to this 'join' flag name
@@ -48,10 +53,6 @@ const Chat = () => {
     });
 
 
-    // just print client socket id into console
-    socket.on('connect', () => console.log(socket.id))
-
-
     // cleanup function's()
     // unMounting socket connection...
     // user leave this chat app...
@@ -59,7 +60,7 @@ const Chat = () => {
       socket.disconnect();
       socket.off();
     }
-  }, [Server, name, room]);
+  }, [server]);
 
 
   // 2nd) 🟨 this useEffect is responsible for...
@@ -68,7 +69,7 @@ const Chat = () => {
 
     // server listening this event at backEnd 
     // by the help of .emit() method...
-    socket.on('message', (message) => {
+    socket.on('message', message => {
 
       // push message inside messages[array]
       setMessages(prev => [...prev, message])
@@ -100,7 +101,9 @@ const Chat = () => {
 
 
   return (
+
     <div className="outerContainer">
+
       <div className="container">
 
         <InfoBar room={room} />
@@ -110,7 +113,9 @@ const Chat = () => {
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
 
       </div>
-      {/* <TextContainer users={users} /> */}
+
+      <TextContainer users={users} />
+
     </div>
   );
 }

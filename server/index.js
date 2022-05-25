@@ -21,7 +21,7 @@ app.use('/fav.ico', express.static('public/fav.ico'));
 // 🙄 all code run inside this function()
 // when client hit into this server through URL 🔗 
 // then we received realtime connection/disconnection
-io.on('connection', (socket) => {
+io.on('connection', socket => {
 
     console.log('Client Open App... ✅');
 
@@ -37,20 +37,23 @@ io.on('connection', (socket) => {
         if (error) return callback(error);
 
         // 1.5) 🟨 join into chat room
-        socket.join(user.room);
+        socket.join(user?.room);
 
         // .emit() ==> all time listening events that generated from Client Side.
         // 1.3) 🟨 simple welcome message from admin... 
         // when any new user come to join into the chat room.
-        socket.emit('message', { user: 'admin', text: `${user.name}, welcome to the room ${user.room}` })
+        socket.emit('message', { user: 'admin', text: `${user?.name}, welcome to the ${user?.room} room` })
 
 
         // 1.4) 🟨 broadcast => send the message everyone inside chat room...
         // but beside that specific user, who recently join into the chat room...
-        socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name}, has joined!` })
+        socket.broadcast.to(user?.room).emit('message', { user: 'admin', text: `${user?.name}, has joined!` })
 
-        io.to(user.room).emit('roomData', { room: user.room, users: getUsersFromRoom(user.room) });
-        
+
+
+
+        io.to(user?.room).emit('roomData', { room: user?.room, users: getUsersFromRoom(user?.room) });
+
         callback()
     });
 
@@ -79,11 +82,20 @@ io.on('connection', (socket) => {
         const user = removeUser(socket.id);
 
         if (user) {
-            io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
-            io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+            // admin generated message that ==> user remove...
+            io.to(user?.room).emit('message', { user: 'admin', text: `${user?.name} has left.` });
+            // remove user from... users[array]
+            io.to(user?.room).emit('roomData', { room: user?.room, users: getUsersInRoom(user?.room) });
         }
     })
 });
+
+
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+    console.log('Server is running at port', PORT, '✅');
+})
 
 
 
@@ -132,10 +144,3 @@ const welcomeMessage = (req, res) => {
     `).status(200);
 }
 app.get('/', welcomeMessage);
-
-
-
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
-    console.log('Server is running at port', PORT, '✅');
-})

@@ -1,4 +1,4 @@
-<img src="./client/public/readme.png" style='width:180px' align="right" />
+<img src="./client/public/readme.png" style='width:160px' align="right" />
 
 > 24 - May - 2022
 
@@ -15,6 +15,8 @@ Just Open this 'Live Link' as 1st tab into your browser & give 'userName' + 'roo
 & open this same 'Live Link' in another (2nd) tab of your browser...
 & this time give a different 'userName' but 'same roomName' that you give before, 
 when you open this chat app through (1st) tab into your browser.
+
+in shot: 'userName' must be different & 'roomName' must be same...
 
 Now start testing & chatting... 
 
