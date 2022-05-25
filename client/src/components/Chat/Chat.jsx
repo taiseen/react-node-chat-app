@@ -15,6 +15,7 @@ let socket;
 
 const Chat = () => {
 
+  // const server = 'http://localhost:5000';
   const server = 'https://react-node-chat-app-bd.herokuapp.com';
 
   const [name, setName] = useState('');
@@ -23,12 +24,12 @@ const Chat = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
-  console.log(messages);
 
   // 1st) 🟨 this useEffect is responsible for...
   // server to client connecting & disconnecting...
   useEffect(() => {
 
+    // userName + chatRome name red/get from user browser URL & set into variable
     const { name, room } = queryString.parse(window.location.search)
     setName(name);
     setRoom(room);
@@ -36,20 +37,17 @@ const Chat = () => {
 
     // 1st) 🟩 From client side, 
     // socket connection start from here...
-    socket = io(server)
+    socket = io(server); // console.log(socket);
 
-    console.log(socket);
 
     // just print client socket id into console
-    socket.on('connect', () => console.log(socket.id))
+    // socket.on('connect', () => console.log(socket.id))
 
 
     // 2nd) 🟩 server response according to this 'join' flag name
     // event listen | & | create this event at server side
-    socket.emit('join', { name, room }, (error) => {
-      if (error) {
-        alert(error);
-      }
+    socket.emit('join', { name, room }, error => {
+      if (error) return alert(error);
     });
 
 
@@ -69,22 +67,15 @@ const Chat = () => {
 
     // server listening this event at backEnd 
     // by the help of .emit() method...
-    socket.on('message', message => {
+    // push message inside messages[array]
+    socket.on('message', message => setMessages(prev => [...prev, message]));
 
-      // push message inside messages[array]
-      setMessages(prev => [...prev, message])
-    })
+    socket.on('roomData', ({ users }) => setUsers(users));
 
-    socket.on('roomData', ({ users }) => {
-      setUsers(users);
-    })
-
+    socket.on('demoTesting', data => console.log(data));
     // receive sms from server
-    socket.on('demoTesting', (data) => console.log(data))
 
-
-    // run this useEffect only when this 'message' is changes...
-  }, [])
+  }, []);
 
 
 
@@ -101,9 +92,7 @@ const Chat = () => {
 
 
   return (
-
     <div className="outerContainer">
-
       <div className="container">
 
         <InfoBar room={room} />
@@ -113,9 +102,7 @@ const Chat = () => {
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
 
       </div>
-
       <TextContainer users={users} />
-
     </div>
   );
 }

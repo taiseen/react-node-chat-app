@@ -2,21 +2,27 @@
 // that do all operation related to user
 
 const users = []
-console.log(users)
 
 
 export const addUser = ({ id, name, room }) => {
 
-    name = name.toLowerCase().trim();
-    room = room.toLowerCase().trim();
+    const userName = name.toLowerCase().trim();
+    const chatRoom = room.toLowerCase().trim();
 
-    const existingUser = users.find(user => user.name === name && user.room === room);
+    const existingUser = users.find(user =>
+        user.userName === name &&
+        user.chatRoom === room
+    );
 
     if (existingUser) {
-        return { error: 'Username is taken.' };
+        return { error: 'UserName is taken...' };
     } else {
-        const user = { id, name, room };
+        // create user Object
+        const user = { id, userName, chatRoom };
+
+        // add user Object into user[array]
         users.push(user);
+
         return { user };
     }
 }
@@ -24,21 +30,17 @@ export const addUser = ({ id, name, room }) => {
 
 export const removeUser = (id) => {
 
-    // const newUsers = users.filter(user => user.id !== id)
-    // return newUsers;
-
     const index = users.findIndex(user => user.id === id);
 
     if (index !== -1) {
-        return users.splice(index, 1)[0]
+        return users.splice(index, 1)[0];
         // [0] ==> return this removed user {Object} according to the (id)
         // & also removed user {Object} from users[array] 
     }
-
 }
 
 
 export const getUser = (id) => users.find(user => user.id === id);
 
 
-export const getUsersFromRoom = (room) => users.filter(user => user.room === room)
+export const getUsersFromRoom = (room) => users.filter(user => user.chatRoom === room);
