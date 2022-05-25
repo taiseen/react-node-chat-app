@@ -1,4 +1,4 @@
-<img src="./client/public/readme.png" style='width:200px' align="right" />
+<img src="./client/public/readme.png" style='width:180px' align="right" />
 
 > 24 - May - 2022
 
@@ -72,8 +72,13 @@ Happy Chatting!... 😎😊😎
 | 2| ReadMe file styling at new way               |
 | 3| FrontEnd + BackEnd Connectivity              | 
 | 4| FrontEnd + BackEnd Full Deployment           | 
-| 5| Life Cycle Method `useEffect` Hook           | 
-| 6| HTTP Server + Express + `Socket.io`          |
+| 5| HTTP Server + Express + `Socket.io`          |
+| 6| Client + Server data passing by `Socket.io`  |
+| 7| Life Cycle Method `useEffect` Hook + cline-up| 
+| 8| users[array] data manipulation by helper function's() |
+| 9| using of `.on()` + `.emit()` method from `Socket.io`  |
+|10| usage of `socket.broadcast.to`(chatRoom)`.emit`('message', {data})|
+
 
     
 Learning by inspired from[.](https://youtu.be/ZwFA3YMfkoc)
