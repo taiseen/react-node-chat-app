@@ -1,4 +1,4 @@
-<img src="./client/public/readme.png" style='width:160px' align="right" />
+<img src="./client/public/readme.png" style='width:175px' align="right" />
 
 > 24 - May - 2022
 
@@ -16,7 +16,7 @@ Just Open this 'Live Link' as 1st tab into your browser & give 'userName' + 'roo
 & this time give a different 'userName' but 'same roomName' that you give before, 
 when you open this chat app through (1st) tab into your browser.
 
-in shot: 'userName' must be different & 'roomName' must be same...
+in-shot: 'userName' must be different & 'roomName' must be same...
 
 Now start testing & chatting... 
 
@@ -62,10 +62,9 @@ Happy Chatting!... 😎😊😎
     │   └── index.js            # server - app running start point
     |
     ├── .gitignore
-    ├── README.md
-    └── license
+    ├── license
+    └── README.md
     🟨
-
 
 # Learning context by developing this application:
 |No| Context learn by building this project...    | 
@@ -89,5 +88,5 @@ Learning by inspired from[.](https://youtu.be/ZwFA3YMfkoc)
 ## 📜 License under the [MIT License](license)
 
 
-[client]: www
-[server]: www
+[client]: https://chat-app-bd.netlify.app
+[server]: https://react-node-chat-app-bd.herokuapp.com

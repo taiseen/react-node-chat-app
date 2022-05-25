@@ -15,7 +15,7 @@ let socket;
 
 const Chat = () => {
 
-  const server = 'http://localhost:5000'
+  const server = 'https://react-node-chat-app-bd.herokuapp.com';
 
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');

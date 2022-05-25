@@ -36,8 +36,6 @@ io.on('connection', socket => {
         // 1.2) 🟨 if error happen terminate this function
         if (error) return callback(error);
 
-        // 1.5) 🟨 join into chat room
-        socket.join(user?.room);
 
         // .emit() ==> all time listening events that generated from Client Side.
         // 1.3) 🟨 simple welcome message from admin... 
@@ -50,8 +48,11 @@ io.on('connection', socket => {
         socket.broadcast.to(user?.room).emit('message', { user: 'admin', text: `${user?.name}, has joined!` })
 
 
+        // 1.5) 🟨 join into chat room
+        socket.join(user?.room);
 
 
+        // 1.6) 🟨 see what users are do inside the chat room
         io.to(user?.room).emit('roomData', { room: user?.room, users: getUsersFromRoom(user?.room) });
 
         callback()
@@ -83,9 +84,9 @@ io.on('connection', socket => {
 
         if (user) {
             // admin generated message that ==> user remove...
-            io.to(user?.room).emit('message', { user: 'admin', text: `${user?.name} has left.` });
+            io.to(user?.room).emit('message', { user: 'admin', text: `${user?.name}, has left!` });
             // remove user from... users[array]
-            io.to(user?.room).emit('roomData', { room: user?.room, users: getUsersInRoom(user?.room) });
+            io.to(user?.room).emit('roomData', { room: user?.room, users: getUsersFromRoom(user?.room) });
         }
     })
 });
